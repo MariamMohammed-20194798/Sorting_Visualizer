@@ -13,12 +13,12 @@
 }
 
 .bar {
-  margin: 1.3px;
-  width: 30px;
+  margin: 1.2px;
+  width: 27px;
   display: inline-block;
 }
 p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 

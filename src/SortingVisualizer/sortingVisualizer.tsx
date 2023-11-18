@@ -16,7 +16,7 @@ const randomNumbers = (min: number, max: number) => {
 };
 
 const generateArray = () => {
-  const size = 6;
+  const size = 35;
   const array = new Array(size);
   for (let i = 0; i < size; i++) {
     array[i] = randomNumbers(5, 700);
