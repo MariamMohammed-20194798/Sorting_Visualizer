@@ -66,6 +66,9 @@ p {
   margin-right: 0.3rem;
   cursor: pointer;
 }
+.algorithmButton:hover {
+  transform: scale(0.8);
+}
 
 .currentAlgorithmButton {
   border-radius: 7rem;

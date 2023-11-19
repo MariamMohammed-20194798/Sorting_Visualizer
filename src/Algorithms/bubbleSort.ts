@@ -28,9 +28,7 @@ const bubbleSort = (arr: number[], steps: ISteps[]) => {
 
 export const bubbleSortSteps = (arr: number[]) => {
   const newArr = [...arr];
-  console.log(newArr);
   let steps: ISteps[] = [];
   bubbleSort(newArr, steps);
-  console.log(newArr);
   return steps;
 };

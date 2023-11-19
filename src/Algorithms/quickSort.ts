@@ -31,12 +31,12 @@ const partition = (
   while (true) {
     while (arr[++i] < pivot) if (i === end) break;
     while (pivot < arr[--j]) if (j === start) break;
-    if (i >= j) break;
 
-    steps.push({ type: "swap", indexes: [i, j] });
-    steps.push({ type: "return", indexes: [i, j] });
-
-    swap(arr, i, j);
+    if (i < j) {
+      steps.push({ type: "swap", indexes: [i, j] });
+      steps.push({ type: "return", indexes: [i, j] });
+      swap(arr, i, j);
+    } else break;
   }
 
   steps.push({ type: "swap", indexes: [start, j] });
