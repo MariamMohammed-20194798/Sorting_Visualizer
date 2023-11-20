@@ -38,7 +38,7 @@ function swapEles(ele: any, i: number, j: number) {
 export const SortingVisualizer: FC<VisualizerProps> = () => {
   const [arr, setArr] = useState(generateArray());
   console.log(arr);
-  const [speed, setSpeed] = useState(100);
+  const [speed, setSpeed] = useState(25);
   const [isSorted, setIsSorted] = useState(false);
   const [selected, setSelected] = useState("");
   const arrayBars = useRef<HTMLDivElement>(null);
