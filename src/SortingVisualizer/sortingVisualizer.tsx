@@ -56,7 +56,7 @@ export const SortingVisualizer: FC<VisualizerProps> = () => {
     const tempArr = [...arr];
     const steps: ISteps[] = mergeSortSteps(tempArr);
     const bars = arrayBars.current!.children as any;
-    console.log(steps);
+
     for (let k = 0; k < steps.length; k++) {
       const {
         type,

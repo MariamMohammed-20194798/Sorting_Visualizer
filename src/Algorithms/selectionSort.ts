@@ -27,5 +27,6 @@ const selectionSort = (arr: number[], steps: ISteps[]) => {
 export const selectionSortSteps = (arr: number[]) => {
   const steps: ISteps[] = [];
   selectionSort(arr, steps);
+  console.log(steps);
   return steps;
 };
