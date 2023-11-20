@@ -1,7 +1,4 @@
-interface ISteps {
-  type: string;
-  indexes: [idx1: number, idx2: number];
-}
+import { ISteps } from "./../Interface/steps";
 
 const sort = (
   arr: number[],
@@ -74,9 +71,7 @@ const merge = (
 
 export const mergeSortSteps = (arr: number[]) => {
   const newArr = [...arr];
-  console.log(arr);
   const steps: ISteps[] = [];
   sort(arr, newArr, 0, arr.length - 1, steps);
-  console.log(arr);
   return steps;
 };

@@ -1,7 +1,4 @@
-interface ISteps {
-  type: string;
-  indexes: [idx1: number, idx2: number];
-}
+import { ISteps } from "./../Interface/steps";
 const swap = (arr: any[], i: number, j: number) => {
   const temp = arr[i];
   arr[i] = arr[j];
@@ -49,9 +46,6 @@ const partition = (
 
 export const quicksortSteps = (arr: number[]) => {
   const steps: ISteps[] = [];
-  const newArr = [...arr];
-  console.log(newArr);
-  sort(newArr, 0, newArr.length - 1, steps);
-  console.log(newArr);
+  sort(arr, 0, arr.length - 1, steps);
   return steps;
 };

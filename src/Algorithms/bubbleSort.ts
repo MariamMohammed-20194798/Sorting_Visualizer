@@ -1,7 +1,4 @@
-interface ISteps {
-  type: string;
-  indexes: [idx1: number, idx2: number];
-}
+import { ISteps } from "./../Interface/steps";
 
 const swap = (arr: number[], i: number, j: number) => {
   const temp = arr[i];
@@ -10,10 +7,10 @@ const swap = (arr: number[], i: number, j: number) => {
 };
 
 const bubbleSort = (arr: number[], steps: ISteps[]) => {
-  const n = arr.length;
+  const len = arr.length;
 
-  for (let i = 0; i < n - 1; i++) {
-    for (let j = 0; j < n - i - 1; j++) {
+  for (let i = 0; i < len - 1; i++) {
+    for (let j = 0; j < len - i - 1; j++) {
       steps.push({ type: "compare", indexes: [j, j + 1] });
 
       if (arr[j] > arr[j + 1]) {
@@ -27,8 +24,7 @@ const bubbleSort = (arr: number[], steps: ISteps[]) => {
 };
 
 export const bubbleSortSteps = (arr: number[]) => {
-  const newArr = [...arr];
   let steps: ISteps[] = [];
-  bubbleSort(newArr, steps);
+  bubbleSort(arr, steps);
   return steps;
 };
