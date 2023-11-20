@@ -17,9 +17,9 @@ const randomNumbers = (min: number, max: number) => {
 };
 
 const generateArray = () => {
-  const size = 35;
-  const array = new Array(size);
-  for (let i = 0; i < size; i++) {
+  const len = 35;
+  const array = new Array(len);
+  for (let i = 0; i < len; i++) {
     array[i] = randomNumbers(5, 700);
   }
   return array;
@@ -37,8 +37,7 @@ function swapEles(ele: any, i: number, j: number) {
 
 export const SortingVisualizer: FC<VisualizerProps> = () => {
   const [arr, setArr] = useState(generateArray());
-  console.log(arr);
-  const [speed, setSpeed] = useState(25);
+  const [speed, setSpeed] = useState(30);
   const [isSorted, setIsSorted] = useState(false);
   const [selected, setSelected] = useState("");
   const arrayBars = useRef<HTMLDivElement>(null);
@@ -54,7 +53,8 @@ export const SortingVisualizer: FC<VisualizerProps> = () => {
   const mergeSortHandler = async (algorithm: string) => {
     setIsSorted(true);
     setSelected(algorithm);
-    const steps: ISteps[] = mergeSortSteps([...arr]);
+    const tempArr = [...arr];
+    const steps: ISteps[] = mergeSortSteps(tempArr);
     const bars = arrayBars.current!.children as any;
     console.log(steps);
     for (let k = 0; k < steps.length; k++) {
@@ -76,105 +76,20 @@ export const SortingVisualizer: FC<VisualizerProps> = () => {
       }
       await new Promise((resolve) => setTimeout(resolve, speed));
     }
-    console.log(steps);
+    setArr(tempArr);
     setIsSorted(false);
   };
   // ######################################################################
-  /* 
-  const selectionSortHandler = async (algorithm: string) => {
-    setIsSorted(true);
-    setSelected(algorithm);
-    const steps = selectionSortSteps(arr);
-
-    for (let k = 0; k < steps.length; k++) {
-      const {
-        type,
-        indexes: [i, j],
-      } = steps[k];
-
-      if (type === "compare") {
-        bar[j].style.backgroundColor = FIRST_COLOR;
-        bar[i].style.backgroundColor = FIRST_COLOR;
-      } else if (type === "swap") {
-        bar[j].style.backgroundColor = SECOND_COLOR;
-        bar[i].style.backgroundColor = SECOND_COLOR;
-        swapEles(bar, j, i);
-      } else if (type === "return") {
-        bar[j].style.backgroundColor = PRIMARY_COLOR;
-        bar[i].style.backgroundColor = PRIMARY_COLOR;
-      }
-      await new Promise((resolve) => setTimeout(resolve, speed));
-    }
-    setIsSorted(false);
-  };
-  // ######################################################################
-
-  const bubbleSortHandler = async (algorithm: string) => {
-    setIsSorted(true);
-    setSelected(algorithm);
-    const steps = bubbleSortSteps(arr);
-    console.log(steps);
-    for (let k = 0; k < steps.length; k++) {
-      let {
-        type,
-        indexes: [i, j],
-      } = steps[k];
-
-      if (type === "compare") {
-        bar[i].style.backgroundColor = SECOND_COLOR;
-        bar[j].style.backgroundColor = SECOND_COLOR;
-      } else if (type === "swap") {
-        bar[i].style.backgroundColor = FIRST_COLOR;
-        bar[j].style.backgroundColor = FIRST_COLOR;
-        quickSwap(bar, i, j);
-      } else if (type === "return") {
-        bar[i].style.backgroundColor = PRIMARY_COLOR;
-        bar[j].style.backgroundColor = PRIMARY_COLOR;
-      }
-      await new Promise((resolve) => setTimeout(resolve, speed));
-    }
-    setIsSorted(false);
-  };
-  // ########################################################################
-
-  const quickSortHandler = async (algorithm: string) => {
-    setIsSorted(true);
-    setSelected(algorithm);
-    const steps = quicksortSteps(arr);
-    console.log(steps);
-    const bars = arrayBars.current!.children as any;
-
-    for (let k = 0; k < steps.length; k++) {
-      const {
-        type,
-        indexes: [i, j],
-      } = steps[k];
-
-      if (type === "swap") {
-        bar[i].style.backgroundColor = SECOND_COLOR;
-        bar[j].style.backgroundColor = SECOND_COLOR;
-        swapEles(bars, i, j);
-      } else if (type === "compare") {
-        bar[i].style.backgroundColor = FIRST_COLOR;
-        bar[j].style.backgroundColor = FIRST_COLOR;
-      } else if (type === "return") {
-        bar[i].style.backgroundColor = PRIMARY_COLOR;
-        bar[j].style.backgroundColor = PRIMARY_COLOR;
-      }
-      await new Promise((resolve) => setTimeout(resolve, speed));
-    }
-    setIsSorted(false);
-  }; */
   const sortingAlgorithmHandler = async (algorithm: string) => {
     setIsSorted(true);
     setSelected(algorithm);
+    const tempArr = [...arr];
     let steps: ISteps[] = [];
     const bars = arrayBars.current!.children as any;
 
-    if (algorithm === "quickSort") steps = quicksortSteps([...arr]);
-    else if (algorithm === "bubbleSort") steps = bubbleSortSteps([...arr]);
-    else if (algorithm === "selectionSort")
-      steps = selectionSortSteps([...arr]);
+    if (algorithm === "quickSort") steps = quicksortSteps(tempArr);
+    else if (algorithm === "bubbleSort") steps = bubbleSortSteps(tempArr);
+    else if (algorithm === "selectionSort") steps = selectionSortSteps(tempArr);
 
     for (let k = 0; k < steps.length; k++) {
       const {
@@ -195,6 +110,7 @@ export const SortingVisualizer: FC<VisualizerProps> = () => {
       }
       await new Promise((resolve) => setTimeout(resolve, speed));
     }
+    setArr(tempArr);
     setIsSorted(false);
   };
   // ########################################################################
@@ -276,13 +192,6 @@ export const SortingVisualizer: FC<VisualizerProps> = () => {
           </div>
         ))}
       </div>
-      {/* { algorithm ? <div
-            id="sort"
-            style={{color: color, cursor: cursor}}
-            onClick={!isRunning ? () => sort(algorithm, array, speed) : null}>
-            Sort!
-          </div> : null
-        } */}
     </div>
   );
 };
