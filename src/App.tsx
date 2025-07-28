@@ -1,5 +1,7 @@
-import "./App.css";
-import { SortingVisualizer } from "./SortingVisualizer/sortingVisualizer";
+import './App.css';
+import { SortingVisualizer } from './SortingVisualizer/sortingVisualizer';
+import React from 'react';
+
 function App() {
   return (
     <div className="App">
